@@ -28,21 +28,28 @@ This project is **not** a static site. It has a real backend, built as Next.js A
 - Product CRUD, order creation, stock decrementing, order status updates
 - Image uploads (converted to base64 and stored with the product)
 
-### ⚠️ Important: the built-in database is file-based (read this before going live)
+### ⚠️ Important: pick a storage mode before going live
 
-To make the project run anywhere with **zero setup and zero external accounts**, data (products/users/orders) is stored in a JSON file (`lib/db.js`). This is great for:
+To make the project run anywhere with **zero setup and zero external accounts**, it ships with a JSON-file data layer (`data/db.json`) as the default. This is great for:
 - Running locally (`npm run dev`) — data persists in `data/db.json`
 - Demoing the UI/UX on Vercel
 
-But **Vercel's serverless functions have an ephemeral, mostly read-only filesystem.** In production, writes go to `/tmp` and **will be lost** on the next cold start or redeploy. That means new products, signups, and orders placed on your live Vercel URL won't stick around.
+But **Vercel's serverless functions have an ephemeral, mostly read-only filesystem.** In production, writes go to `/tmp` and **will be lost/inconsistent across devices** on the next cold start or redeploy. That means new products, signups, and orders placed on your live Vercel URL may not show up for other visitors, or may disappear later.
 
-**For a real store, swap in a real database.** Every read/write in the app goes through the small set of functions exported from `lib/db.js`, so this is a contained change. Good options that pair well with Next.js on Vercel:
-- [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres)
-- [Supabase](https://supabase.com) (Postgres)
-- [Neon](https://neon.tech) (Postgres)
-- [Turso](https://turso.tech) (SQLite at the edge)
+**Supabase support is built in — just switch it on.** `lib/db.js` automatically uses Supabase (a real, shared, persistent Postgres database) the moment two environment variables are set; otherwise it silently falls back to the JSON file. No code changes needed, only a few minutes of setup:
 
-Same caveat applies to product images (`app/api/upload/route.js`) — they're stored as base64 inside the product record for simplicity. For a real store with many/large images, use an image host like Cloudinary, S3, or Vercel Blob instead and store the returned URL.
+1. Create a free project at [supabase.com](https://supabase.com).
+2. In your Supabase project, open **SQL Editor → New query**, paste the entire contents of `supabase/schema.sql` from this project, and click **Run**. This creates the `products`, `users`, and `orders` tables and seeds them with the same demo data as the JSON file.
+3. In Supabase, go to **Project Settings → API** and copy:
+   - **Project URL** → this is your `SUPABASE_URL`
+   - **service_role** secret key (not the `anon public` one) → this is your `SUPABASE_SERVICE_ROLE_KEY`
+4. Add both as environment variables — in `.env.local` for local dev, and in **Vercel → Project Settings → Environment Variables** for production. Redeploy.
+
+That's it — every device now reads/writes the same database, so products you add in the admin panel show up for everyone, permanently.
+
+The `service_role` key is powerful (it bypasses Row Level Security) and must stay server-side only — it's only ever read inside `lib/supabaseClient.js`, which is never imported into client components. Never prefix it with `NEXT_PUBLIC_`.
+
+Same image caveat applies either way (`app/api/upload/route.js`) — images are stored as base64 inside the product record for simplicity, in the file or in Postgres. For a real store with many/large images, use an image host like Cloudinary, S3, or Vercel Blob instead and store the returned URL.
 
 ## Getting started locally
 
@@ -68,6 +75,8 @@ Copy `.env.example` to `.env.local` and fill in real values:
 | `ADMIN_EMAIL` | Email required to log into `/admin`. |
 | `ADMIN_PASSWORD` | Password required to log into `/admin`. |
 | `ADMIN_JWT_SECRET` | Signs admin session tokens. Use a different long random string than `JWT_SECRET`. |
+| `SUPABASE_URL` *(optional)* | Your Supabase project URL. Leave unset to use the local JSON file instead. |
+| `SUPABASE_SERVICE_ROLE_KEY` *(optional)* | Your Supabase `service_role` secret key. Leave unset to use the local JSON file instead. |
 
 Generate strong secrets with: `openssl rand -base64 32`
 
@@ -76,10 +85,10 @@ Generate strong secrets with: `openssl rand -base64 32`
 1. Push this project to a new GitHub repository.
 2. Go to [vercel.com/new](https://vercel.com/new) and import the repo.
 3. Vercel auto-detects Next.js — no build config needed.
-4. In the Vercel project's **Settings → Environment Variables**, add `JWT_SECRET`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`, and `ADMIN_JWT_SECRET` (same as your `.env.local`, with strong values).
+4. In the Vercel project's **Settings → Environment Variables**, add `JWT_SECRET`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`, and `ADMIN_JWT_SECRET` (same as your `.env.local`, with strong values). Add `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` too if you've set up Supabase (strongly recommended — see above).
 5. Deploy.
 
-Remember: **product/order data won't persist in production** until you swap in a real database (see above) — the UI, auth, admin panel, and every flow will otherwise work correctly.
+If you skipped Supabase: **product/order data won't persist reliably in production** until you set it up (see above) — the UI, auth, admin panel, and every flow will otherwise work correctly.
 
 ## Project structure
 
@@ -91,8 +100,9 @@ app/                     Next.js App Router pages + API routes
   category/[slug]/       Category listing page
   account/                Account + order history + order tracking
 components/              Shared React components (Header, Footer, Cart/Auth/Wishlist context, ProductCard, admin ProductForm)
-lib/                     db.js (data layer), auth.js (JWT + password hashing), format.js
-data/seed.json           Seed data for products/users/orders
+lib/                     db.js (data layer, auto-switches file/Supabase), supabaseClient.js, auth.js (JWT + password hashing)
+supabase/schema.sql      Run once in Supabase's SQL Editor to enable persistent storage
+data/seed.json           Seed data used by the JSON-file fallback
 middleware.js            Protects all /admin/* routes except /admin/login
 public/                  Logo, favicon, and static assets
 ```
