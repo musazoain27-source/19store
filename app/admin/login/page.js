@@ -34,8 +34,8 @@ function AdminLoginForm() {
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4 bg-white/5">
-      <div className="max-w-sm w-full bg-neutral-900 rounded-2xl border border-white/10 p-8 animate-scaleIn">
+    <div className="min-h-[80vh] flex items-center justify-center px-4 bg-black/5">
+      <div className="max-w-sm w-full bg-white rounded-2xl border border-black/10 p-8 animate-scaleIn">
         <div className="flex flex-col items-center mb-6">
           <div className="w-14 h-14 rounded-xl overflow-hidden mb-3">
             <Image src="/logo-mark-192.png" alt="19Store" width={56} height={56} className="w-full h-full object-cover" />
@@ -52,7 +52,7 @@ function AdminLoginForm() {
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
-        <p className="text-xs text-white/40 mt-6 text-center">
+        <p className="text-xs text-black/40 mt-6 text-center">
           Credentials are set via ADMIN_EMAIL / ADMIN_PASSWORD environment variables.
         </p>
       </div>

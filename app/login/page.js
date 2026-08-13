@@ -41,9 +41,9 @@ function LoginForm() {
             <Image src="/logo-mark-192.png" alt="19Store" width={64} height={64} className="w-full h-full object-cover" />
           </div>
           <h1 className="font-display text-2xl font-bold text-center">
-            Welcome to 19<span className="text-brand-gold">Store</span>
+            Welcome to 19<span className="text-brand-blue">Store</span>
           </h1>
-          <p className="text-white/50 text-sm text-center mt-1">Log in to start shopping.</p>
+          <p className="text-black/50 text-sm text-center mt-1">Log in to start shopping.</p>
         </div>
 
         <form onSubmit={submit} className="space-y-4">
@@ -55,10 +55,9 @@ function LoginForm() {
           </button>
         </form>
 
-        <p className="text-xs text-white/30 mt-4 text-center">Demo account: demo@19store.com / demo1234</p>
-        <p className="text-sm text-white/60 mt-6 text-center">
+        <p className="text-sm text-black/60 mt-6 text-center">
           Don&apos;t have an account?{' '}
-          <Link href="/signup" className="font-semibold text-brand-gold hover:underline">Sign Up</Link>
+          <Link href="/signup" className="font-semibold text-brand-blue hover:underline">Sign Up</Link>
         </p>
       </div>
     </div>

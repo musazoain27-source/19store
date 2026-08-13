@@ -33,15 +33,15 @@ export default function OrdersPage() {
   }, [user, loading, router]);
 
   if (loading || fetching) {
-    return <div className="max-w-4xl mx-auto px-4 py-24 text-center text-white/40">Loading orders...</div>;
+    return <div className="max-w-4xl mx-auto px-4 py-24 text-center text-black/40">Loading orders...</div>;
   }
 
   if (orders.length === 0) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-24 text-center animate-fadeIn">
-        <Package size={56} className="mx-auto text-white/20 mb-6" />
+        <Package size={56} className="mx-auto text-black/20 mb-6" />
         <h1 className="text-2xl font-semibold mb-2">No orders yet</h1>
-        <p className="text-white/50 mb-8">When you place an order, it will show up here.</p>
+        <p className="text-black/50 mb-8">When you place an order, it will show up here.</p>
         <Link href="/" className="btn-primary">Start Shopping</Link>
       </div>
     );
@@ -55,18 +55,18 @@ export default function OrdersPage() {
           <Link
             key={order.id}
             href={`/account/orders/${order.id}`}
-            className="card-hover flex items-center justify-between border border-white/10 rounded-2xl p-5"
+            className="card-hover flex items-center justify-between border border-black/10 rounded-2xl p-5"
           >
             <div>
               <p className="font-semibold">{order.id}</p>
-              <p className="text-sm text-white/50">{new Date(order.createdAt).toLocaleDateString()} · {order.items.length} item(s)</p>
+              <p className="text-sm text-black/50">{new Date(order.createdAt).toLocaleDateString()} · {order.items.length} item(s)</p>
             </div>
             <div className="flex items-center gap-4">
-              <span className={`text-xs font-semibold px-3 py-1.5 rounded-full ${STATUS_COLORS[order.status] || 'bg-white/5'}`}>
+              <span className={`text-xs font-semibold px-3 py-1.5 rounded-full ${STATUS_COLORS[order.status] || 'bg-black/5'}`}>
                 {order.status}
               </span>
               <span className="font-semibold hidden sm:block">{formatPKR(order.total)}</span>
-              <ChevronRight size={18} className="text-white/30" />
+              <ChevronRight size={18} className="text-black/30" />
             </div>
           </Link>
         ))}

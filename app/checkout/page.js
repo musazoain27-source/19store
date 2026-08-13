@@ -53,12 +53,12 @@ export default function CheckoutPage() {
       <div className="max-w-xl mx-auto px-4 py-24 text-center animate-fadeInUp">
         <CheckCircle2 size={64} className="mx-auto text-green-500 mb-6" />
         <h1 className="text-2xl font-semibold mb-2">Order Placed!</h1>
-        <p className="text-white/50 mb-1">Your order <span className="font-medium text-white">{success.id}</span> has been confirmed.</p>
-        <p className="text-white/50 mb-8">Total: {formatPKR(success.total)}</p>
+        <p className="text-black/50 mb-1">Your order <span className="font-medium text-black">{success.id}</span> has been confirmed.</p>
+        <p className="text-black/50 mb-8">Total: {formatPKR(success.total)}</p>
 
         {paymentMethod === 'transfer' && (
-          <div className="max-w-sm mx-auto mb-8 p-4 rounded-xl bg-white/5 border border-white/10 text-left">
-            <p className="text-sm text-white/70 mb-3">
+          <div className="max-w-sm mx-auto mb-8 p-4 rounded-xl bg-black/5 border border-black/10 text-left">
+            <p className="text-sm text-black/70 mb-3">
               Don't forget to confirm your payment so we can start processing your order.
             </p>
             <a
@@ -83,7 +83,7 @@ export default function CheckoutPage() {
   if (!loading && items.length === 0) {
     return (
       <div className="max-w-xl mx-auto px-4 py-24 text-center">
-        <p className="text-white/50 mb-6">Your cart is empty.</p>
+        <p className="text-black/50 mb-6">Your cart is empty.</p>
         <Link href="/" className="btn-primary">Shop Now</Link>
       </div>
     );
@@ -95,7 +95,7 @@ export default function CheckoutPage() {
       <div className="grid md:grid-cols-[1fr_360px] gap-10">
         <form onSubmit={handlePlaceOrder} className="space-y-6">
           {!user && !loading && (
-            <div className="bg-brand-gold/10 border border-brand-gold/30 text-sm rounded-xl p-4">
+            <div className="bg-brand-blue/10 border border-brand-blue/30 text-sm rounded-xl p-4">
               Please <Link href="/login?redirect=/checkout" className="font-semibold underline">log in</Link> to place your order.
             </div>
           )}
@@ -114,29 +114,29 @@ export default function CheckoutPage() {
           <div>
             <h2 className="font-semibold text-lg mb-4">Payment Method</h2>
             <div className="space-y-3">
-              <label className="flex items-start gap-3 border border-white/15 rounded-xl p-4 cursor-pointer has-[:checked]:border-brand-gold has-[:checked]:bg-brand-gold/5 transition-colors">
-                <input type="radio" name="payment" checked={paymentMethod === 'cod'} onChange={() => setPaymentMethod('cod')} className="accent-brand-gold mt-0.5" />
+              <label className="flex items-start gap-3 border border-black/15 rounded-xl p-4 cursor-pointer has-[:checked]:border-brand-blue has-[:checked]:bg-brand-blue/5 transition-colors">
+                <input type="radio" name="payment" checked={paymentMethod === 'cod'} onChange={() => setPaymentMethod('cod')} className="accent-brand-blue mt-0.5" />
                 <div>
                   <span className="font-medium text-sm block">Cash on Delivery</span>
-                  <span className="text-xs text-white/40">Pay in cash when your order arrives. A flat Rs. 300 delivery fee applies.</span>
+                  <span className="text-xs text-black/40">Pay in cash when your order arrives. A flat Rs. 300 delivery fee applies.</span>
                 </div>
               </label>
 
-              <label className="flex items-start gap-3 border border-white/15 rounded-xl p-4 cursor-pointer has-[:checked]:border-brand-gold has-[:checked]:bg-brand-gold/5 transition-colors">
-                <input type="radio" name="payment" checked={paymentMethod === 'transfer'} onChange={() => setPaymentMethod('transfer')} className="accent-brand-gold mt-0.5" />
+              <label className="flex items-start gap-3 border border-black/15 rounded-xl p-4 cursor-pointer has-[:checked]:border-brand-blue has-[:checked]:bg-brand-blue/5 transition-colors">
+                <input type="radio" name="payment" checked={paymentMethod === 'transfer'} onChange={() => setPaymentMethod('transfer')} className="accent-brand-blue mt-0.5" />
                 <div>
                   <span className="font-medium text-sm block">Online Transfer (JazzCash / EasyPaisa)</span>
-                  <span className="text-xs text-white/40">Send payment directly, no delivery fee.</span>
+                  <span className="text-xs text-black/40">Send payment directly, no delivery fee.</span>
                 </div>
               </label>
 
               {paymentMethod === 'transfer' && (
-                <div className="ml-1 p-4 rounded-xl bg-white/5 border border-white/10 animate-slideDown space-y-3">
-                  <p className="text-sm text-white/70">
+                <div className="ml-1 p-4 rounded-xl bg-black/5 border border-black/10 animate-slideDown space-y-3">
+                  <p className="text-sm text-black/70">
                     Send the order total to this number via JazzCash or EasyPaisa:
                   </p>
-                  <p className="text-lg font-semibold tracking-wide text-brand-gold">0334-6008064</p>
-                  <p className="text-xs text-white/40">
+                  <p className="text-lg font-semibold tracking-wide text-brand-blue">0334-6008064</p>
+                  <p className="text-xs text-black/40">
                     After sending payment, place your order below, then tap the button to confirm on WhatsApp with a screenshot of your payment.
                   </p>
                   <a
@@ -159,28 +159,28 @@ export default function CheckoutPage() {
           </button>
         </form>
 
-        <div className="border border-white/10 rounded-2xl p-6 h-fit">
+        <div className="border border-black/10 rounded-2xl p-6 h-fit">
           <h2 className="font-semibold text-lg mb-4">Order Summary</h2>
           <div className="space-y-3 mb-4 max-h-72 overflow-y-auto pr-1">
             {items.map((item) => (
               <div key={item.key} className="flex justify-between text-sm">
-                <span className="text-white/70">
-                  {item.title} <span className="text-white/40">({item.size} × {item.qty})</span>
+                <span className="text-black/70">
+                  {item.title} <span className="text-black/40">({item.size} × {item.qty})</span>
                 </span>
                 <span className="font-medium">{formatPKR(item.price * item.qty)}</span>
               </div>
             ))}
           </div>
-          <hr className="my-4 border-white/10" />
+          <hr className="my-4 border-black/10" />
           <div className="flex justify-between text-sm mb-2">
-            <span className="text-white/60">Subtotal</span>
+            <span className="text-black/60">Subtotal</span>
             <span>{formatPKR(subtotal)}</span>
           </div>
           <div className="flex justify-between text-sm mb-4">
-            <span className="text-white/60">Delivery Fee</span>
+            <span className="text-black/60">Delivery Fee</span>
             <span>{deliveryFee > 0 ? formatPKR(deliveryFee) : 'Free'}</span>
           </div>
-          <hr className="my-4 border-white/10" />
+          <hr className="my-4 border-black/10" />
           <div className="flex justify-between font-semibold text-lg">
             <span>Total</span>
             <span>{formatPKR(total)}</span>

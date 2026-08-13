@@ -8,7 +8,7 @@ export default function NotFound() {
         <Image src="/logo-mark-192.png" alt="19Store" width={64} height={64} className="w-full h-full object-cover" />
       </div>
       <h1 className="font-display text-3xl font-bold mb-2">Page not found</h1>
-      <p className="text-white/50 mb-8 max-w-sm">
+      <p className="text-black/50 mb-8 max-w-sm">
         The page you're looking for doesn't exist or may have been moved.
       </p>
       <Link href="/" className="btn-primary">

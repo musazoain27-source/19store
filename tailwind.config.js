@@ -4,7 +4,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: { DEFAULT: '#111111', gold: '#c9a55c', light: '#f7f5f2' },
+        brand: { DEFAULT: '#1d1d1f', blue: '#0071e3', light: '#fbfbfd' },
+      },
+      fontFamily: {
+        sans: ['var(--font-inter)', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        display: ['var(--font-inter)', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       keyframes: {
         fadeIn: { '0%': { opacity: 0 }, '100%': { opacity: 1 } },
@@ -21,12 +25,12 @@ module.exports = {
         },
       },
       animation: {
-        fadeIn: 'fadeIn 0.5s ease-out both',
-        fadeInUp: 'fadeInUp 0.6s ease-out both',
-        slideDown: 'slideDown 0.3s ease-out both',
-        scaleIn: 'scaleIn 0.2s ease-out both',
+        fadeIn: 'fadeIn 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) both',
+        fadeInUp: 'fadeInUp 0.7s cubic-bezier(0.25, 0.1, 0.25, 1) both',
+        slideDown: 'slideDown 0.35s cubic-bezier(0.25, 0.1, 0.25, 1) both',
+        scaleIn: 'scaleIn 0.25s cubic-bezier(0.25, 0.1, 0.25, 1) both',
         pulseSlow: 'pulseSlow 2s ease-in-out infinite',
-        toastIn: 'toastIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both',
+        toastIn: 'toastIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both',
         bounceSmall: 'bounceSmall 0.5s ease-out',
       },
     },

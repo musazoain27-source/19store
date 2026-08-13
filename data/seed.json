@@ -12,7 +12,13 @@
         "https://images.unsplash.com/photo-1509942774463-acf339cf87d5?w=900&q=80",
         "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=900&q=80"
       ],
-      "sizes": { "S": 8, "M": 14, "L": 10, "XL": 5, "XXL": 0 },
+      "sizes": {
+        "S": 8,
+        "M": 14,
+        "L": 10,
+        "XL": 5,
+        "XXL": 0
+      },
       "featured": true,
       "createdAt": "2026-01-10T10:00:00.000Z"
     },
@@ -27,7 +33,13 @@
         "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=900&q=80",
         "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=900&q=80"
       ],
-      "sizes": { "S": 20, "M": 25, "L": 18, "XL": 12, "XXL": 6 },
+      "sizes": {
+        "S": 20,
+        "M": 25,
+        "L": 18,
+        "XL": 12,
+        "XXL": 6
+      },
       "featured": true,
       "createdAt": "2026-01-08T10:00:00.000Z"
     },
@@ -42,7 +54,13 @@
         "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=900&q=80",
         "https://images.unsplash.com/photo-1521223890158-f9f7c3d5d504?w=900&q=80"
       ],
-      "sizes": { "S": 5, "M": 9, "L": 7, "XL": 3, "XXL": 0 },
+      "sizes": {
+        "S": 5,
+        "M": 9,
+        "L": 7,
+        "XL": 3,
+        "XXL": 0
+      },
       "featured": true,
       "createdAt": "2026-01-05T10:00:00.000Z"
     },
@@ -57,7 +75,13 @@
         "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=900&q=80",
         "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=900&q=80"
       ],
-      "sizes": { "S": 12, "M": 16, "L": 14, "XL": 8, "XXL": 4 },
+      "sizes": {
+        "S": 12,
+        "M": 16,
+        "L": 14,
+        "XL": 8,
+        "XXL": 4
+      },
       "featured": false,
       "createdAt": "2026-01-02T10:00:00.000Z"
     },
@@ -67,12 +91,18 @@
       "category": "Jackets",
       "price": 12999,
       "compareAtPrice": 15999,
-      "description": "A tailored wool-blend overcoat with a notch lapel and horn-effect buttons. Fully lined for warmth without the bulk — an investment piece for cold weather.",
+      "description": "A tailored wool-blend overcoat with a notch lapel and horn-effect buttons. Fully lined for warmth without the bulk \u2014 an investment piece for cold weather.",
       "images": [
         "https://images.unsplash.com/photo-1544923246-77307dd654cb?w=900&q=80",
         "https://images.unsplash.com/photo-1544441893-675973e31985?w=900&q=80"
       ],
-      "sizes": { "S": 3, "M": 6, "L": 5, "XL": 2, "XXL": 0 },
+      "sizes": {
+        "S": 3,
+        "M": 6,
+        "L": 5,
+        "XL": 2,
+        "XXL": 0
+      },
       "featured": true,
       "createdAt": "2025-12-20T10:00:00.000Z"
     },
@@ -87,7 +117,13 @@
         "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=900&q=80",
         "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=900&q=80"
       ],
-      "sizes": { "S": 10, "M": 15, "L": 11, "XL": 6, "XXL": 3 },
+      "sizes": {
+        "S": 10,
+        "M": 15,
+        "L": 11,
+        "XL": 6,
+        "XXL": 3
+      },
       "featured": false,
       "createdAt": "2025-12-18T10:00:00.000Z"
     },
@@ -102,7 +138,13 @@
         "https://images.unsplash.com/photo-1517438476312-10d79c077509?w=900&q=80",
         "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=900&q=80"
       ],
-      "sizes": { "S": 7, "M": 11, "L": 9, "XL": 4, "XXL": 2 },
+      "sizes": {
+        "S": 7,
+        "M": 11,
+        "L": 9,
+        "XL": 4,
+        "XXL": 2
+      },
       "featured": false,
       "createdAt": "2025-12-15T10:00:00.000Z"
     },
@@ -117,38 +159,17 @@
         "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=900&q=80",
         "https://images.unsplash.com/photo-1544923246-77307dd654cb?w=900&q=80"
       ],
-      "sizes": { "S": 6, "M": 10, "L": 8, "XL": 5, "XXL": 1 },
+      "sizes": {
+        "S": 6,
+        "M": 10,
+        "L": 8,
+        "XL": 5,
+        "XXL": 1
+      },
       "featured": false,
       "createdAt": "2025-12-10T10:00:00.000Z"
     }
   ],
-  "users": [
-    {
-      "id": "u_demo",
-      "name": "Demo Customer",
-      "email": "demo@19store.com",
-      "passwordHash": "$2b$10$sI2lrdXawe4C.YXX055YA.CwaqCVweRuszYRNck.FVaOROflQS4iC",
-      "wishlist": ["p1", "p5"],
-      "createdAt": "2026-01-01T10:00:00.000Z"
-    }
-  ],
-  "orders": [
-    {
-      "id": "ORD-1001",
-      "userId": "u_demo",
-      "items": [
-        { "productId": "p2", "title": "Classic Crewneck Tee", "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=900&q=80", "size": "M", "qty": 2, "price": 1799 }
-      ],
-      "shipping": { "name": "Demo Customer", "address": "123 Main St", "city": "Lahore", "postalCode": "54000", "phone": "03001234567" },
-      "total": 3598,
-      "status": "Delivered",
-      "createdAt": "2026-01-20T10:00:00.000Z",
-      "tracking": [
-        { "status": "Order Placed", "date": "2026-01-20T10:00:00.000Z" },
-        { "status": "Processing", "date": "2026-01-20T14:00:00.000Z" },
-        { "status": "Shipped", "date": "2026-01-21T09:00:00.000Z" },
-        { "status": "Delivered", "date": "2026-01-23T16:00:00.000Z" }
-      ]
-    }
-  ]
+  "users": [],
+  "orders": []
 }

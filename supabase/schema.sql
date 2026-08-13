@@ -74,7 +74,3 @@ insert into products (id, title, category, price, compare_at_price, description,
   '["https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=900&q=80","https://images.unsplash.com/photo-1544923246-77307dd654cb?w=900&q=80"]',
   '{"S":6,"M":10,"L":8,"XL":5,"XXL":1}', false, '2025-12-10T10:00:00Z')
 on conflict (id) do nothing;
-
-insert into users (id, name, email, password_hash, wishlist, created_at) values
-('u_demo','Demo Customer','demo@19store.com','$2b$10$sI2lrdXawe4C.YXX055YA.CwaqCVweRuszYRNck.FVaOROflQS4iC','["p1","p5"]','2026-01-01T10:00:00Z')
-on conflict (id) do nothing;

@@ -37,7 +37,7 @@ export default function SignupPage() {
             <Image src="/logo-mark-192.png" alt="19Store" width={64} height={64} className="w-full h-full object-cover" />
           </div>
           <h1 className="font-display text-2xl font-bold text-center">Create Your Account</h1>
-          <p className="text-white/50 text-sm text-center mt-1">Join 19Store for a faster checkout.</p>
+          <p className="text-black/50 text-sm text-center mt-1">Join 19Store for a faster checkout.</p>
         </div>
 
         <form onSubmit={submit} className="space-y-4">
@@ -50,9 +50,9 @@ export default function SignupPage() {
           </button>
         </form>
 
-        <p className="text-sm text-white/60 mt-6 text-center">
+        <p className="text-sm text-black/60 mt-6 text-center">
           Already have an account?{' '}
-          <Link href="/login" className="font-semibold text-brand-gold hover:underline">Log In</Link>
+          <Link href="/login" className="font-semibold text-brand-blue hover:underline">Log In</Link>
         </p>
       </div>
     </div>

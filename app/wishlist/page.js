@@ -26,9 +26,9 @@ export default function WishlistPage() {
   if (loaded && !fetching && products.length === 0) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-24 text-center animate-fadeIn">
-        <Heart size={56} className="mx-auto text-white/20 mb-6" />
+        <Heart size={56} className="mx-auto text-black/20 mb-6" />
         <h1 className="text-2xl font-semibold mb-2">Your wishlist is empty</h1>
-        <p className="text-white/50 mb-8">Save items you love for later.</p>
+        <p className="text-black/50 mb-8">Save items you love for later.</p>
         <Link href="/" className="btn-primary">
           Start Browsing <ArrowRight size={18} />
         </Link>

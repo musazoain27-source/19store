@@ -35,7 +35,7 @@ export default async function HomePage({ searchParams }) {
           {products.length} result{products.length !== 1 ? 's' : ''} for &ldquo;{searchParams.search}&rdquo;
         </h1>
         {products.length === 0 ? (
-          <p className="text-white/50">No products matched your search. Try a different keyword.</p>
+          <p className="text-black/50">No products matched your search. Try a different keyword.</p>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {products.map((p) => (
@@ -61,7 +61,7 @@ export default async function HomePage({ searchParams }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/10" />
         <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-6 w-full">
           <div className="max-w-lg animate-fadeInUp">
-            <p className="text-brand-gold text-sm font-semibold tracking-[0.2em] mb-3">NEW SEASON</p>
+            <p className="text-brand-blue text-sm font-semibold tracking-[0.2em] mb-3">NEW SEASON</p>
             <h1 className="font-display text-4xl md:text-6xl font-bold text-white leading-tight mb-5">
               Everyday essentials, elevated.
             </h1>
@@ -84,7 +84,7 @@ export default async function HomePage({ searchParams }) {
           <Image src="https://images.unsplash.com/photo-1544923246-77307dd654cb?w=900&q=80" alt="Outerwear" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/10" />
           <div className="absolute bottom-5 left-6 text-white">
-            <p className="text-xs tracking-widest text-brand-gold font-semibold mb-1">LIMITED STOCK</p>
+            <p className="text-xs tracking-widest text-brand-blue font-semibold mb-1">LIMITED STOCK</p>
             <p className="text-xl font-semibold">Outerwear Edit</p>
           </div>
         </Link>
@@ -95,7 +95,7 @@ export default async function HomePage({ searchParams }) {
           <Image src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=900&q=80" alt="Essentials" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/10" />
           <div className="absolute bottom-5 left-6 text-white">
-            <p className="text-xs tracking-widest text-brand-gold font-semibold mb-1">UP TO 20% OFF</p>
+            <p className="text-xs tracking-widest text-brand-blue font-semibold mb-1">UP TO 20% OFF</p>
             <p className="text-xl font-semibold">Everyday Essentials</p>
           </div>
         </Link>

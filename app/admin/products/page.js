@@ -33,9 +33,9 @@ export default function AdminProductsPage() {
         </Link>
       </div>
 
-      <div className="bg-neutral-900 border border-white/10 rounded-2xl overflow-hidden">
+      <div className="bg-white border border-black/10 rounded-2xl overflow-hidden">
         <table className="w-full text-sm">
-          <thead className="bg-neutral-900/[0.03] text-left">
+          <thead className="bg-black/[0.03] text-left">
             <tr>
               <th className="px-4 py-3 font-medium">Product</th>
               <th className="px-4 py-3 font-medium">Category</th>
@@ -46,22 +46,22 @@ export default function AdminProductsPage() {
           </thead>
           <tbody>
             {loading && (
-              <tr><td colSpan={5} className="px-4 py-8 text-center text-white/40">Loading...</td></tr>
+              <tr><td colSpan={5} className="px-4 py-8 text-center text-black/40">Loading...</td></tr>
             )}
             {!loading && products.length === 0 && (
-              <tr><td colSpan={5} className="px-4 py-8 text-center text-white/40">No products yet. Add your first product.</td></tr>
+              <tr><td colSpan={5} className="px-4 py-8 text-center text-black/40">No products yet. Add your first product.</td></tr>
             )}
             {products.map((p) => {
               const stock = Object.values(p.sizes || {}).reduce((a, b) => a + b, 0);
               return (
-                <tr key={p.id} className="border-t border-white/5">
+                <tr key={p.id} className="border-t border-black/5">
                   <td className="px-4 py-3 flex items-center gap-3">
-                    <div className="relative w-10 h-12 rounded-lg overflow-hidden bg-white/5 shrink-0">
+                    <div className="relative w-10 h-12 rounded-lg overflow-hidden bg-black/5 shrink-0">
                       {p.images?.[0] && <Image src={p.images[0]} alt={p.title} fill className="object-cover" />}
                     </div>
                     <span className="font-medium">{p.title}</span>
                   </td>
-                  <td className="px-4 py-3 text-white/60">{p.category}</td>
+                  <td className="px-4 py-3 text-black/60">{p.category}</td>
                   <td className="px-4 py-3">{formatPKR(p.price)}</td>
                   <td className="px-4 py-3">
                     <span className={stock === 0 ? 'text-red-500 font-medium' : stock <= 5 ? 'text-amber-600 font-medium' : ''}>
@@ -70,7 +70,7 @@ export default function AdminProductsPage() {
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex justify-end gap-2">
-                      <Link href={`/admin/products/${p.id}/edit`} className="p-2 rounded-lg hover:bg-white/5 text-white/60" aria-label="Edit">
+                      <Link href={`/admin/products/${p.id}/edit`} className="p-2 rounded-lg hover:bg-black/5 text-black/60" aria-label="Edit">
                         <Pencil size={16} />
                       </Link>
                       <button onClick={() => handleDelete(p.id)} className="p-2 rounded-lg hover:bg-red-50 text-red-500" aria-label="Delete">
