@@ -78,7 +78,7 @@ export default function CartPage() {
             <span className="text-white/60">Shipping</span>
             <span className="text-white/50">Calculated at checkout</span>
           </div>
-          <hr className="my-4" />
+          <hr className="my-4 border-white/10" />
           <div className="flex justify-between font-semibold text-lg mb-6">
             <span>Total</span>
             <span>{formatPKR(subtotal)}</span>

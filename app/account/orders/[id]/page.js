@@ -99,7 +99,20 @@ export default function OrderTrackingPage() {
             </div>
           ))}
         </div>
-        <hr className="my-4" />
+        <hr className="my-4 border-white/10" />
+        <div className="flex justify-between text-sm mb-2">
+          <span className="text-white/60">Subtotal</span>
+          <span>{formatPKR(order.total - (order.deliveryFee || 0))}</span>
+        </div>
+        <div className="flex justify-between text-sm mb-2">
+          <span className="text-white/60">Delivery Fee</span>
+          <span>{order.deliveryFee > 0 ? formatPKR(order.deliveryFee) : 'Free'}</span>
+        </div>
+        <div className="flex justify-between text-sm mb-4">
+          <span className="text-white/60">Payment Method</span>
+          <span className="capitalize">{order.paymentMethod === 'transfer' ? 'Online Transfer' : 'Cash on Delivery'}</span>
+        </div>
+        <hr className="my-4 border-white/10" />
         <div className="flex justify-between font-semibold">
           <span>Total</span>
           <span>{formatPKR(order.total)}</span>

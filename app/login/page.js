@@ -2,12 +2,11 @@
 import { useState, Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useAuth } from '@/components/AuthContext';
 
 function LoginForm() {
   const { login } = useAuth();
-  const router = useRouter();
   const params = useSearchParams();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +19,13 @@ function LoginForm() {
     setError('');
     try {
       await login(email, password);
-      router.push(params.get('redirect') || '/');
+      // A hard navigation (not router.push) is used here on purpose: Next.js
+      // prefetches "/" in the background while the visitor is still logged
+      // out, caches that redirect-to-login result client-side, and then
+      // router.push('/') can silently reuse that stale cached result even
+      // after login succeeds. A full navigation always hits the server
+      // fresh, so it correctly picks up the new auth cookie every time.
+      window.location.href = params.get('redirect') || '/';
     } catch (err) {
       setError(err.message);
     } finally {

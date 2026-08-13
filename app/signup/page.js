@@ -20,7 +20,8 @@ export default function SignupPage() {
     setError('');
     try {
       await signup(name, email, password);
-      router.push('/');
+      // See login page for why this is a hard navigation, not router.push.
+      window.location.href = '/';
     } catch (err) {
       setError(err.message);
     } finally {

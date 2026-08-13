@@ -55,6 +55,23 @@ export default function CheckoutPage() {
         <h1 className="text-2xl font-semibold mb-2">Order Placed!</h1>
         <p className="text-white/50 mb-1">Your order <span className="font-medium text-white">{success.id}</span> has been confirmed.</p>
         <p className="text-white/50 mb-8">Total: {formatPKR(success.total)}</p>
+
+        {paymentMethod === 'transfer' && (
+          <div className="max-w-sm mx-auto mb-8 p-4 rounded-xl bg-white/5 border border-white/10 text-left">
+            <p className="text-sm text-white/70 mb-3">
+              Don't forget to confirm your payment so we can start processing your order.
+            </p>
+            <a
+              href="https://wa.me/923346008064?text=Hi%2C%20I%27ve%20sent%20payment%20for%20my%2019Store%20order.%20Here%27s%20my%20screenshot%3A"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#25D366] text-black font-medium text-sm px-4 py-2.5 rounded-full hover:brightness-95 transition-all hover:-translate-y-0.5"
+            >
+              <MessageCircle size={18} /> Confirm Payment on WhatsApp
+            </a>
+          </div>
+        )}
+
         <div className="flex gap-3 justify-center">
           <Link href={`/account/orders/${success.id}`} className="btn-primary">Track Order</Link>
           <Link href="/" className="btn-secondary">Continue Shopping</Link>
