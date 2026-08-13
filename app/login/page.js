@@ -1,6 +1,7 @@
 'use client';
 import { useState, Suspense } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/components/AuthContext';
 
@@ -19,7 +20,7 @@ function LoginForm() {
     setError('');
     try {
       await login(email, password);
-      router.push(params.get('redirect') || '/account');
+      router.push(params.get('redirect') || '/');
     } catch (err) {
       setError(err.message);
     } finally {
@@ -28,24 +29,33 @@ function LoginForm() {
   };
 
   return (
-    <div className="max-w-md mx-auto px-4 py-16 animate-fadeInUp">
-      <h1 className="text-2xl font-semibold mb-2">Welcome Back</h1>
-      <p className="text-white/50 mb-8">Log in to your 19Store account.</p>
+    <div className="min-h-[85vh] flex items-center justify-center px-4">
+      <div className="max-w-sm w-full animate-fadeInUp">
+        <div className="flex flex-col items-center mb-8">
+          <div className="w-16 h-16 rounded-2xl overflow-hidden mb-4 shadow-2xl">
+            <Image src="/logo-mark-192.png" alt="19Store" width={64} height={64} className="w-full h-full object-cover" />
+          </div>
+          <h1 className="font-display text-2xl font-bold text-center">
+            Welcome to 19<span className="text-brand-gold">Store</span>
+          </h1>
+          <p className="text-white/50 text-sm text-center mt-1">Log in to start shopping.</p>
+        </div>
 
-      <form onSubmit={submit} className="space-y-4">
-        <input required type="email" placeholder="Email address" value={email} onChange={(e) => setEmail(e.target.value)} className="input" />
-        <input required type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="input" />
-        {error && <p className="text-red-500 text-sm">{error}</p>}
-        <button type="submit" disabled={loading} className="btn-primary w-full">
-          {loading ? 'Logging in...' : 'Log In'}
-        </button>
-      </form>
+        <form onSubmit={submit} className="space-y-4">
+          <input required type="email" placeholder="Email address" value={email} onChange={(e) => setEmail(e.target.value)} className="input" />
+          <input required type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="input" />
+          {error && <p className="text-red-500 text-sm">{error}</p>}
+          <button type="submit" disabled={loading} className="btn-primary w-full">
+            {loading ? 'Logging in...' : 'Log In'}
+          </button>
+        </form>
 
-      <p className="text-sm text-white/40 mt-4">Demo account: demo@19store.com / demo1234</p>
-      <p className="text-sm text-white/60 mt-6">
-        Don&apos;t have an account?{' '}
-        <Link href="/signup" className="font-semibold text-brand-gold">Sign Up</Link>
-      </p>
+        <p className="text-xs text-white/30 mt-4 text-center">Demo account: demo@19store.com / demo1234</p>
+        <p className="text-sm text-white/60 mt-6 text-center">
+          Don&apos;t have an account?{' '}
+          <Link href="/signup" className="font-semibold text-brand-gold hover:underline">Sign Up</Link>
+        </p>
+      </div>
     </div>
   );
 }

@@ -15,15 +15,15 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: #b8924a; }
 
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-2 bg-white text-black px-6 py-3 rounded-full font-medium tracking-wide transition-all duration-200 hover:bg-neutral-200 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:pointer-events-none;
+  @apply inline-flex items-center justify-center gap-2 bg-white text-black px-6 py-3 rounded-full font-medium tracking-wide transition-all duration-200 hover:bg-neutral-200 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:scale-95 disabled:opacity-50 disabled:pointer-events-none;
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 bg-transparent border border-white/30 text-white px-6 py-3 rounded-full font-medium tracking-wide transition-all duration-200 hover:bg-white hover:text-black disabled:opacity-50 disabled:pointer-events-none;
+  @apply inline-flex items-center justify-center gap-2 bg-transparent border border-white/30 text-white px-6 py-3 rounded-full font-medium tracking-wide transition-all duration-200 hover:bg-white hover:text-black active:scale-95 disabled:opacity-50 disabled:pointer-events-none;
 }
 
 .btn-gold {
-  @apply inline-flex items-center justify-center gap-2 bg-brand-gold text-white px-6 py-3 rounded-full font-medium tracking-wide transition-all duration-200 hover:brightness-110 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:pointer-events-none;
+  @apply inline-flex items-center justify-center gap-2 bg-brand-gold text-white px-6 py-3 rounded-full font-medium tracking-wide transition-all duration-200 hover:brightness-110 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:scale-95 disabled:opacity-50 disabled:pointer-events-none;
 }
 
 .input {

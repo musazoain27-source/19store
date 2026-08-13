@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Search, ShoppingBag, Heart, User, Menu, X } from 'lucide-react';
 import { useCart } from './CartContext';
@@ -11,6 +11,8 @@ const CATEGORIES = ['Hoodies', 'T-Shirts', 'Jackets', 'Bottoms'];
 
 export default function Header() {
   const { count } = useCart();
+  const [bump, setBump] = useState(false);
+  const prevCount = useRef(count);
   const { user } = useAuth();
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -24,6 +26,16 @@ export default function Header() {
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    if (count > prevCount.current) {
+      setBump(true);
+      const t = setTimeout(() => setBump(false), 500);
+      prevCount.current = count;
+      return () => clearTimeout(t);
+    }
+    prevCount.current = count;
+  }, [count]);
 
   // Proper open/close sequencing so the drawer slides in/out instead of
   // just popping in, and locks background scroll while it's open (this
@@ -101,7 +113,7 @@ export default function Header() {
               <User size={20} />
             </Link>
             <Link href="/cart" className="relative p-2 hover:text-brand-gold transition-colors" aria-label="Cart">
-              <ShoppingBag size={20} />
+              <ShoppingBag size={20} className={bump ? 'animate-bounceSmall' : ''} />
               {count > 0 && (
                 <span className="absolute -top-0.5 -right-0.5 bg-brand-gold text-white text-[10px] leading-none rounded-full w-4 h-4 flex items-center justify-center font-semibold">
                   {count > 9 ? '9+' : count}

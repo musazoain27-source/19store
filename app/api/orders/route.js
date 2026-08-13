@@ -24,7 +24,7 @@ export async function POST(req) {
   if (!payload) return NextResponse.json({ error: 'Please log in to place an order' }, { status: 401 });
 
   const body = await req.json();
-  const { items, shipping } = body;
+  const { items, shipping, paymentMethod } = body;
 
   if (!Array.isArray(items) || items.length === 0) {
     return NextResponse.json({ error: 'Cart is empty' }, { status: 400 });
@@ -48,13 +48,20 @@ export async function POST(req) {
     await upsertProduct(product);
   }
 
-  const total = items.reduce((sum, i) => sum + i.price * i.qty, 0);
+  // Delivery fee is computed here (not trusted from the client): flat Rs.
+  // 300 for Cash on Delivery, free for Online Transfer.
+  const method = paymentMethod === 'transfer' ? 'transfer' : 'cod';
+  const deliveryFee = method === 'cod' ? 300 : 0;
+  const itemsTotal = items.reduce((sum, i) => sum + i.price * i.qty, 0);
+  const total = itemsTotal + deliveryFee;
   const now = new Date().toISOString();
   const order = {
     id: `ORD-${nanoid(8).toUpperCase()}`,
     userId: payload.sub,
     items,
     shipping,
+    paymentMethod: method,
+    deliveryFee,
     total,
     status: 'Processing',
     createdAt: now,

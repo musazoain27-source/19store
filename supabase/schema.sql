@@ -31,6 +31,8 @@ create table if not exists orders (
   user_id text not null references users(id),
   items jsonb not null default '[]',
   shipping jsonb not null default '{}',
+  payment_method text not null default 'cod',
+  delivery_fee integer not null default 0,
   total integer not null,
   status text not null default 'Processing',
   tracking jsonb not null default '[]',

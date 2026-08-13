@@ -2,6 +2,7 @@ import './globals.css';
 import { CartProvider } from '@/components/CartContext';
 import { AuthProvider } from '@/components/AuthContext';
 import { WishlistProvider } from '@/components/WishlistContext';
+import { ToastProvider } from '@/components/ToastContext';
 import SiteChrome from '@/components/SiteChrome';
 import LoadingScreen from '@/components/LoadingScreen';
 
@@ -27,7 +28,9 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <CartProvider>
             <WishlistProvider>
-              <SiteChrome>{children}</SiteChrome>
+              <ToastProvider>
+                <SiteChrome>{children}</SiteChrome>
+              </ToastProvider>
             </WishlistProvider>
           </CartProvider>
         </AuthProvider>

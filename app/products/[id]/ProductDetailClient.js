@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Heart, Minus, Plus, Check, ShieldCheck, Truck, RotateCcw } from 'lucide-react';
 import { useCart } from '@/components/CartContext';
 import { useWishlist } from '@/components/WishlistContext';
+import { useToast } from '@/components/ToastContext';
 import { formatPKR } from '@/lib/format';
 
 const SIZES = ['S', 'M', 'L', 'XL', 'XXL'];
@@ -18,6 +19,7 @@ export default function ProductDetailClient({ product }) {
 
   const { addItem } = useCart();
   const { isWishlisted, toggle } = useWishlist();
+  const { showToast } = useToast();
   const router = useRouter();
 
   const stockForSize = size ? product.sizes?.[size] ?? 0 : null;
@@ -29,6 +31,7 @@ export default function ProductDetailClient({ product }) {
     setError('');
     addItem(product, size, qty);
     setAdded(true);
+    showToast(`Added ${product.title} to cart`);
     setTimeout(() => setAdded(false), 1800);
   };
 

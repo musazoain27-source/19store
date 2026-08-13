@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { CheckCircle2, Lock } from 'lucide-react';
+import { CheckCircle2, MessageCircle } from 'lucide-react';
 import { useCart } from '@/components/CartContext';
 import { useAuth } from '@/components/AuthContext';
 import { formatPKR } from '@/lib/format';
@@ -18,6 +18,9 @@ export default function CheckoutPage() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(null);
 
+  const deliveryFee = paymentMethod === 'cod' ? 300 : 0;
+  const total = subtotal + deliveryFee;
+
   const update = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
 
   const handlePlaceOrder = async (e) => {
@@ -32,7 +35,7 @@ export default function CheckoutPage() {
       const res = await fetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items, shipping: form, paymentMethod }),
+        body: JSON.stringify({ items, shipping: form, paymentMethod, deliveryFee }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Could not place order');
@@ -94,22 +97,39 @@ export default function CheckoutPage() {
           <div>
             <h2 className="font-semibold text-lg mb-4">Payment Method</h2>
             <div className="space-y-3">
-              <label className="flex items-center gap-3 border border-white/15 rounded-xl p-4 cursor-pointer has-[:checked]:border-brand has-[:checked]:bg-white/5">
-                <input type="radio" name="payment" checked={paymentMethod === 'cod'} onChange={() => setPaymentMethod('cod')} className="accent-brand" />
-                <span className="font-medium text-sm">Cash on Delivery</span>
+              <label className="flex items-start gap-3 border border-white/15 rounded-xl p-4 cursor-pointer has-[:checked]:border-brand-gold has-[:checked]:bg-brand-gold/5 transition-colors">
+                <input type="radio" name="payment" checked={paymentMethod === 'cod'} onChange={() => setPaymentMethod('cod')} className="accent-brand-gold mt-0.5" />
+                <div>
+                  <span className="font-medium text-sm block">Cash on Delivery</span>
+                  <span className="text-xs text-white/40">Pay in cash when your order arrives. A flat Rs. 300 delivery fee applies.</span>
+                </div>
               </label>
-              <label className="flex items-center gap-3 border border-white/15 rounded-xl p-4 cursor-pointer has-[:checked]:border-brand has-[:checked]:bg-white/5">
-                <input type="radio" name="payment" checked={paymentMethod === 'card'} onChange={() => setPaymentMethod('card')} className="accent-brand" />
-                <span className="font-medium text-sm">Credit / Debit Card</span>
+
+              <label className="flex items-start gap-3 border border-white/15 rounded-xl p-4 cursor-pointer has-[:checked]:border-brand-gold has-[:checked]:bg-brand-gold/5 transition-colors">
+                <input type="radio" name="payment" checked={paymentMethod === 'transfer'} onChange={() => setPaymentMethod('transfer')} className="accent-brand-gold mt-0.5" />
+                <div>
+                  <span className="font-medium text-sm block">Online Transfer (JazzCash / EasyPaisa)</span>
+                  <span className="text-xs text-white/40">Send payment directly, no delivery fee.</span>
+                </div>
               </label>
-              {paymentMethod === 'card' && (
-                <div className="grid sm:grid-cols-2 gap-4 pl-1 animate-slideDown">
-                  <input placeholder="Card Number" className="input sm:col-span-2" />
-                  <input placeholder="MM/YY" className="input" />
-                  <input placeholder="CVC" className="input" />
-                  <p className="sm:col-span-2 text-xs text-white/40 flex items-center gap-1">
-                    <Lock size={12} /> Demo checkout — no real payment is processed.
+
+              {paymentMethod === 'transfer' && (
+                <div className="ml-1 p-4 rounded-xl bg-white/5 border border-white/10 animate-slideDown space-y-3">
+                  <p className="text-sm text-white/70">
+                    Send the order total to this number via JazzCash or EasyPaisa:
                   </p>
+                  <p className="text-lg font-semibold tracking-wide text-brand-gold">0334-6008064</p>
+                  <p className="text-xs text-white/40">
+                    After sending payment, place your order below, then tap the button to confirm on WhatsApp with a screenshot of your payment.
+                  </p>
+                  <a
+                    href="https://wa.me/923346008064?text=Hi%2C%20I%27ve%20sent%20payment%20for%20my%2019Store%20order.%20Here%27s%20my%20screenshot%3A"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-[#25D366] text-black font-medium text-sm px-4 py-2.5 rounded-full hover:brightness-95 transition-all hover:-translate-y-0.5"
+                  >
+                    <MessageCircle size={18} /> Confirm Payment on WhatsApp
+                  </a>
                 </div>
               )}
             </div>
@@ -118,7 +138,7 @@ export default function CheckoutPage() {
           {error && <p className="text-red-500 text-sm">{error}</p>}
 
           <button type="submit" disabled={placing} className="btn-primary w-full">
-            {placing ? 'Placing Order...' : `Place Order — ${formatPKR(subtotal)}`}
+            {placing ? 'Placing Order...' : `Place Order — ${formatPKR(total)}`}
           </button>
         </form>
 
@@ -134,10 +154,19 @@ export default function CheckoutPage() {
               </div>
             ))}
           </div>
-          <hr className="my-4" />
+          <hr className="my-4 border-white/10" />
+          <div className="flex justify-between text-sm mb-2">
+            <span className="text-white/60">Subtotal</span>
+            <span>{formatPKR(subtotal)}</span>
+          </div>
+          <div className="flex justify-between text-sm mb-4">
+            <span className="text-white/60">Delivery Fee</span>
+            <span>{deliveryFee > 0 ? formatPKR(deliveryFee) : 'Free'}</span>
+          </div>
+          <hr className="my-4 border-white/10" />
           <div className="flex justify-between font-semibold text-lg">
             <span>Total</span>
-            <span>{formatPKR(subtotal)}</span>
+            <span>{formatPKR(total)}</span>
           </div>
         </div>
       </div>
