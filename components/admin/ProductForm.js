@@ -120,7 +120,7 @@ export default function ProductForm({ initial, productId }) {
         <label className="text-sm font-medium mb-2 block">Product Images</label>
         <div className="flex flex-wrap gap-3 mb-3">
           {images.map((img, i) => (
-            <div key={i} className="relative w-24 h-28 rounded-xl overflow-hidden border border-black/10 group">
+            <div key={i} className="relative w-24 h-28 rounded-xl overflow-hidden border border-white/10 group">
               <Image src={img} alt={`Product ${i + 1}`} fill className="object-cover" />
               <button
                 type="button"
@@ -131,13 +131,13 @@ export default function ProductForm({ initial, productId }) {
               </button>
             </div>
           ))}
-          <label className="w-24 h-28 rounded-xl border-2 border-dashed border-black/15 flex flex-col items-center justify-center gap-1 cursor-pointer hover:border-brand-blue transition-colors">
-            {uploading ? <Loader2 size={20} className="animate-spin text-black/40" /> : <UploadCloud size={20} className="text-black/40" />}
-            <span className="text-xs text-black/40">{uploading ? 'Uploading' : 'Add Photos'}</span>
+          <label className="w-24 h-28 rounded-xl border-2 border-dashed border-white/15 flex flex-col items-center justify-center gap-1 cursor-pointer hover:border-brand-blue transition-colors">
+            {uploading ? <Loader2 size={20} className="animate-spin text-white/40" /> : <UploadCloud size={20} className="text-white/40" />}
+            <span className="text-xs text-white/40">{uploading ? 'Uploading' : 'Add Photos'}</span>
             <input type="file" accept="image/*" multiple className="hidden" onChange={handleFiles} disabled={uploading} />
           </label>
         </div>
-        <p className="text-xs text-black/40">Images are stored as embedded data in the JSON database — fine for a demo, but for many large images consider an image host like Cloudinary or Vercel Blob.</p>
+        <p className="text-xs text-white/40">Images are stored as embedded data in the JSON database — fine for a demo, but for many large images consider an image host like Cloudinary or Vercel Blob.</p>
       </div>
 
       <div>
@@ -145,7 +145,7 @@ export default function ProductForm({ initial, productId }) {
         <div className="grid grid-cols-5 gap-3">
           {SIZES.map((s) => (
             <div key={s}>
-              <p className="text-xs text-black/50 mb-1 text-center">{s}</p>
+              <p className="text-xs text-white/50 mb-1 text-center">{s}</p>
               <input
                 type="number"
                 min="0"

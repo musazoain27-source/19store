@@ -47,7 +47,7 @@ export default function ProductDetailClient({ product }) {
     <div className="grid md:grid-cols-2 gap-10 md:gap-16">
       {/* Images */}
       <div className="animate-fadeIn">
-        <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-black/5 mb-3">
+        <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-white/5 mb-3">
           <Image src={product.images?.[activeImage]} alt={product.title} fill className="object-cover" priority />
         </div>
         {product.images?.length > 1 && (
@@ -69,21 +69,21 @@ export default function ProductDetailClient({ product }) {
 
       {/* Details */}
       <div className="animate-fadeInUp">
-        <p className="text-xs text-black/40 uppercase tracking-wide mb-2">{product.category}</p>
+        <p className="text-xs text-white/40 uppercase tracking-wide mb-2">{product.category}</p>
         <h1 className="font-display text-2xl md:text-3xl font-bold mb-3">{product.title}</h1>
         <div className="flex items-center gap-3 mb-6">
           <span className="text-2xl font-semibold">{formatPKR(product.price)}</span>
           {product.compareAtPrice && (
-            <span className="text-lg text-black/40 line-through">{formatPKR(product.compareAtPrice)}</span>
+            <span className="text-lg text-white/40 line-through">{formatPKR(product.compareAtPrice)}</span>
           )}
         </div>
 
-        <p className="text-black/60 leading-relaxed mb-8">{product.description}</p>
+        <p className="text-white/60 leading-relaxed mb-8">{product.description}</p>
 
         {/* Sizes */}
         <div className="mb-6">
           <p className="text-sm font-medium mb-3">
-            Size {size && <span className="text-black/40 font-normal">— {stockForSize > 0 ? `${stockForSize} in stock` : 'Out of stock'}</span>}
+            Size {size && <span className="text-white/40 font-normal">— {stockForSize > 0 ? `${stockForSize} in stock` : 'Out of stock'}</span>}
           </p>
           <div className="flex gap-2 flex-wrap">
             {SIZES.map((s) => {
@@ -100,10 +100,10 @@ export default function ProductDetailClient({ product }) {
                   }}
                   className={`w-14 h-12 rounded-xl border font-medium text-sm transition-all ${
                     disabled
-                      ? 'border-black/10 text-black/25 line-through cursor-not-allowed'
+                      ? 'border-white/10 text-white/25 line-through cursor-not-allowed'
                       : size === s
-                      ? 'border-brand bg-brand text-black'
-                      : 'border-black/15 hover:border-brand'
+                      ? 'border-brand bg-brand text-white'
+                      : 'border-white/15 hover:border-brand'
                   }`}
                 >
                   {s}
@@ -116,10 +116,10 @@ export default function ProductDetailClient({ product }) {
         {/* Quantity */}
         <div className="mb-6">
           <p className="text-sm font-medium mb-3">Quantity</p>
-          <div className="inline-flex items-center border border-black/15 rounded-xl overflow-hidden">
+          <div className="inline-flex items-center border border-white/15 rounded-xl overflow-hidden">
             <button
               onClick={() => setQty((q) => Math.max(1, q - 1))}
-              className="w-11 h-11 flex items-center justify-center hover:bg-black/5 transition-colors"
+              className="w-11 h-11 flex items-center justify-center hover:bg-white/5 transition-colors"
               aria-label="Decrease quantity"
             >
               <Minus size={16} />
@@ -127,7 +127,7 @@ export default function ProductDetailClient({ product }) {
             <span className="w-12 text-center font-medium">{qty}</span>
             <button
               onClick={() => setQty((q) => (stockForSize ? Math.min(stockForSize, q + 1) : q + 1))}
-              className="w-11 h-11 flex items-center justify-center hover:bg-black/5 transition-colors"
+              className="w-11 h-11 flex items-center justify-center hover:bg-white/5 transition-colors"
               aria-label="Increase quantity"
             >
               <Plus size={16} />
@@ -138,7 +138,7 @@ export default function ProductDetailClient({ product }) {
         {error && <p className="text-red-500 text-sm mb-4 animate-fadeIn">{error}</p>}
 
         {totalStock === 0 ? (
-          <div className="rounded-xl bg-black/5 text-center py-4 font-medium text-black/50 mb-4">
+          <div className="rounded-xl bg-white/5 text-center py-4 font-medium text-white/50 mb-4">
             This product is currently out of stock
           </div>
         ) : (
@@ -160,24 +160,24 @@ export default function ProductDetailClient({ product }) {
 
         <button
           onClick={() => toggle(product.id)}
-          className="flex items-center gap-2 text-sm font-medium text-black/60 hover:text-brand transition-colors mb-8"
+          className="flex items-center gap-2 text-sm font-medium text-white/60 hover:text-brand transition-colors mb-8"
         >
           <Heart size={18} className={isWishlisted(product.id) ? 'fill-brand-blue text-brand-blue' : ''} />
           {isWishlisted(product.id) ? 'Saved to Wishlist' : 'Add to Wishlist'}
         </button>
 
-        <div className="grid grid-cols-3 gap-3 text-center border-t border-black/10 pt-6">
+        <div className="grid grid-cols-3 gap-3 text-center border-t border-white/10 pt-6">
           <div className="flex flex-col items-center gap-1.5">
             <Truck size={20} className="text-brand-blue" />
-            <span className="text-xs text-black/60">Fast Shipping</span>
+            <span className="text-xs text-white/60">Fast Shipping</span>
           </div>
           <div className="flex flex-col items-center gap-1.5">
             <RotateCcw size={20} className="text-brand-blue" />
-            <span className="text-xs text-black/60">Easy Returns</span>
+            <span className="text-xs text-white/60">Easy Returns</span>
           </div>
           <div className="flex flex-col items-center gap-1.5">
             <ShieldCheck size={20} className="text-brand-blue" />
-            <span className="text-xs text-black/60">Secure Checkout</span>
+            <span className="text-xs text-white/60">Secure Checkout</span>
           </div>
         </div>
       </div>

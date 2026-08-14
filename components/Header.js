@@ -71,13 +71,13 @@ export default function Header() {
   return (
     <>
     <header
-      className={`sticky top-0 z-50 bg-white/90 backdrop-blur-md transition-shadow ${
+      className={`sticky top-0 z-50 bg-black/90 backdrop-blur-md transition-shadow ${
         scrolled ? 'shadow-md shadow-black/5' : ''
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16">
-          <button className="md:hidden p-2 -ml-2 text-black" onClick={openMenu} aria-label="Open menu">
+          <button className="md:hidden p-2 -ml-2 text-white" onClick={openMenu} aria-label="Open menu">
             <Menu size={22} />
           </button>
 
@@ -85,20 +85,24 @@ export default function Header() {
             <div className="w-10 h-10 rounded-lg overflow-hidden">
               <Image src="/logo-mark-192.png" alt="19Store logo" width={40} height={40} className="w-full h-full object-cover" />
             </div>
-            <span className="font-display text-xl font-bold tracking-tight hidden sm:block text-black">
+            <span className="font-display text-xl font-bold tracking-tight hidden sm:block text-white">
               19<span className="text-brand-blue">Store</span>
             </span>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-black/90">
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white/90">
             {CATEGORIES.map((c) => (
-              <Link key={c} href={`/category/${encodeURIComponent(c)}`} className="hover:text-brand-blue transition-colors">
+              <Link
+                key={c}
+                href={`/category/${encodeURIComponent(c)}`}
+                className="relative hover:text-brand-blue transition-colors after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-brand-blue after:transition-all after:duration-300 hover:after:w-full"
+              >
                 {c}
               </Link>
             ))}
           </nav>
 
-          <div className="flex items-center gap-1 md:gap-2 text-black">
+          <div className="flex items-center gap-1 md:gap-2 text-white">
             <button className="p-2 hover:text-brand-blue transition-colors" onClick={() => setSearchOpen((s) => !s)} aria-label="Search">
               <Search size={20} />
             </button>
@@ -126,7 +130,7 @@ export default function Header() {
         {searchOpen && (
           <form onSubmit={submitSearch} className="pb-4 animate-slideDown">
             <div className="relative">
-              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-black/40" />
+              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" />
               <input
                 autoFocus
                 value={query}
@@ -147,29 +151,29 @@ export default function Header() {
             onClick={closeMenu}
           />
           <div
-            className={`absolute left-0 top-0 h-full w-72 max-w-[85vw] bg-white border-r border-black/10 p-6 shadow-2xl overflow-y-auto transition-transform duration-250 ease-out will-change-transform ${
+            className={`absolute left-0 top-0 h-full w-72 max-w-[85vw] bg-neutral-950 border-r border-white/10 p-6 shadow-2xl overflow-y-auto transition-transform duration-250 ease-out will-change-transform ${
               menuVisible ? 'translate-x-0' : '-translate-x-full'
             }`}
           >
             <div className="flex items-center justify-between mb-8">
-              <span className="font-display text-lg font-bold flex items-center gap-2 text-black">
+              <span className="font-display text-lg font-bold flex items-center gap-2 text-white">
                 <span className="w-8 h-8 rounded-lg overflow-hidden inline-block">
                   <Image src="/logo-mark-192.png" alt="19Store" width={32} height={32} className="w-full h-full object-cover" />
                 </span>
                 19<span className="text-brand-blue">Store</span>
               </span>
-              <button onClick={closeMenu} aria-label="Close menu" className="text-black/70 hover:text-black p-1">
+              <button onClick={closeMenu} aria-label="Close menu" className="text-white/70 hover:text-white p-1">
                 <X size={22} />
               </button>
             </div>
-            <nav className="flex flex-col gap-4 text-base font-medium text-black/90">
+            <nav className="flex flex-col gap-4 text-base font-medium text-white/90">
               <Link href="/" onClick={closeMenu} className="hover:text-brand-blue transition-colors">Home</Link>
               {CATEGORIES.map((c) => (
                 <Link key={c} href={`/category/${encodeURIComponent(c)}`} onClick={closeMenu} className="hover:text-brand-blue transition-colors">
                   {c}
                 </Link>
               ))}
-              <hr className="my-2 border-black/10" />
+              <hr className="my-2 border-white/10" />
               <Link href="/wishlist" onClick={closeMenu} className="hover:text-brand-blue transition-colors">Wishlist</Link>
               <Link href={user ? '/account' : '/login'} onClick={closeMenu} className="hover:text-brand-blue transition-colors">
                 {user ? 'My Account' : 'Login / Sign Up'}

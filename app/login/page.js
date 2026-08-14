@@ -43,7 +43,7 @@ function LoginForm() {
           <h1 className="font-display text-2xl font-bold text-center">
             Welcome to 19<span className="text-brand-blue">Store</span>
           </h1>
-          <p className="text-black/50 text-sm text-center mt-1">Log in to start shopping.</p>
+          <p className="text-white/50 text-sm text-center mt-1">Log in to start shopping.</p>
         </div>
 
         <form onSubmit={submit} className="space-y-4">
@@ -55,7 +55,7 @@ function LoginForm() {
           </button>
         </form>
 
-        <p className="text-sm text-black/60 mt-6 text-center">
+        <p className="text-sm text-white/60 mt-6 text-center">
           Don&apos;t have an account?{' '}
           <Link href="/signup" className="font-semibold text-brand-blue hover:underline">Sign Up</Link>
         </p>

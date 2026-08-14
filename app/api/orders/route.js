@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { nanoid } from 'nanoid';
-import { getOrders, getOrdersByUser, createOrder, getProductById, upsertProduct } from '@/lib/db';
+import { getOrders, getOrdersByUser, createOrder, getProductById, upsertProduct, getDiscountByCode } from '@/lib/db';
+import { isDiscountUsable, computeDiscountAmount } from '@/lib/discount';
 import { verifyToken } from '@/lib/auth';
 import { AUTH_COOKIE, ADMIN_COOKIE } from '@/lib/session';
 
@@ -24,7 +25,7 @@ export async function POST(req) {
   if (!payload) return NextResponse.json({ error: 'Please log in to place an order' }, { status: 401 });
 
   const body = await req.json();
-  const { items, shipping, paymentMethod } = body;
+  const { items, shipping, paymentMethod, discountCode } = body;
 
   if (!Array.isArray(items) || items.length === 0) {
     return NextResponse.json({ error: 'Cart is empty' }, { status: 400 });
@@ -53,7 +54,20 @@ export async function POST(req) {
   const method = paymentMethod === 'transfer' ? 'transfer' : 'cod';
   const deliveryFee = method === 'cod' ? 300 : 0;
   const itemsTotal = items.reduce((sum, i) => sum + i.price * i.qty, 0);
-  const total = itemsTotal + deliveryFee;
+
+  // Discount code is re-validated here (not trusted from the client) so a
+  // customer can never fake or reuse an expired/deactivated code.
+  let appliedDiscountCode = null;
+  let discountAmount = 0;
+  if (discountCode) {
+    const discount = await getDiscountByCode(discountCode);
+    const { ok, reason } = isDiscountUsable(discount);
+    if (!ok) return NextResponse.json({ error: reason }, { status: 400 });
+    appliedDiscountCode = discount.code;
+    discountAmount = computeDiscountAmount(discount, itemsTotal);
+  }
+
+  const total = itemsTotal + deliveryFee - discountAmount;
   const now = new Date().toISOString();
   const order = {
     id: `ORD-${nanoid(8).toUpperCase()}`,
@@ -62,6 +76,8 @@ export async function POST(req) {
     shipping,
     paymentMethod: method,
     deliveryFee,
+    discountCode: appliedDiscountCode,
+    discountAmount,
     total,
     status: 'Processing',
     createdAt: now,

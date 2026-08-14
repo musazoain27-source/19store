@@ -33,9 +33,20 @@ create table if not exists orders (
   shipping jsonb not null default '{}',
   payment_method text not null default 'cod',
   delivery_fee integer not null default 0,
+  discount_code text,
+  discount_amount integer not null default 0,
   total integer not null,
   status text not null default 'Processing',
   tracking jsonb not null default '[]',
+  created_at timestamptz not null default now()
+);
+
+create table if not exists discounts (
+  code text primary key,
+  type text not null default 'fixed', -- 'fixed' (Rs. amount) or 'percent' (%)
+  value integer not null,
+  expires_at timestamptz,
+  active boolean not null default true,
   created_at timestamptz not null default now()
 );
 

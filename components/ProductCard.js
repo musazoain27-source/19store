@@ -13,8 +13,8 @@ export default function ProductCard({ product }) {
 
   return (
     <div className="group relative">
-      <Link href={`/products/${product.id}`} className="block card-hover rounded-2xl overflow-hidden bg-white border border-black/5 shadow-sm">
-        <div className="relative aspect-[3/4] overflow-hidden bg-black/[0.03]">
+      <Link href={`/products/${product.id}`} className="block card-hover rounded-2xl overflow-hidden bg-neutral-900 border border-white/5 shadow-sm">
+        <div className="relative aspect-[3/4] overflow-hidden bg-white/[0.03]">
           <Image
             src={product.images?.[0]}
             alt={product.title}
@@ -34,12 +34,12 @@ export default function ProductCard({ product }) {
           )}
         </div>
         <div className="p-4">
-          <p className="text-xs text-black/40 uppercase tracking-wide mb-1">{product.category}</p>
+          <p className="text-xs text-white/40 uppercase tracking-wide mb-1">{product.category}</p>
           <h3 className="font-medium text-sm md:text-base line-clamp-2 mb-1.5">{product.title}</h3>
           <div className="flex items-center gap-2">
             <span className="font-semibold">{formatPKR(product.price)}</span>
             {product.compareAtPrice && (
-              <span className="text-sm text-black/40 line-through">{formatPKR(product.compareAtPrice)}</span>
+              <span className="text-sm text-white/40 line-through">{formatPKR(product.compareAtPrice)}</span>
             )}
           </div>
         </div>
@@ -52,7 +52,7 @@ export default function ProductCard({ product }) {
         aria-label="Toggle wishlist"
         className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow-md transition-transform hover:scale-110"
       >
-        <Heart size={16} className={wishlisted ? 'fill-brand-blue text-brand-blue' : 'text-black/60'} />
+        <Heart size={16} className={wishlisted ? 'fill-brand-blue text-brand-blue' : 'text-white/60'} />
       </button>
     </div>
   );

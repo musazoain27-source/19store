@@ -19,7 +19,7 @@ export default function LoadingScreen() {
 
   return (
     <div
-      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white transition-opacity duration-300 ${
+      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black transition-opacity duration-300 ${
         fading ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >
@@ -27,9 +27,9 @@ export default function LoadingScreen() {
         <div className="w-20 h-20 rounded-2xl overflow-hidden shadow-xl">
           <Image src="/logo-mark-192.png" alt="19Store" width={80} height={80} priority className="w-full h-full object-cover" />
         </div>
-        <p className="text-black tracking-[0.3em] text-sm font-medium">19STORE</p>
+        <p className="text-white tracking-[0.3em] text-sm font-medium">19STORE</p>
       </div>
-      <div className="mt-8 h-1 w-40 bg-black/10 rounded-full overflow-hidden">
+      <div className="mt-8 h-1 w-40 bg-white/10 rounded-full overflow-hidden">
         <div className="h-full w-1/2 bg-brand-blue rounded-full animate-[shimmer_1s_ease-in-out_infinite]" />
       </div>
     </div>

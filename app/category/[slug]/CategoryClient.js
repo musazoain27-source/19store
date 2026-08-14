@@ -36,7 +36,7 @@ export default function CategoryClient({ category, products }) {
           onChange={(e) => setMaxPrice(e.target.value)}
           className="w-full accent-brand-blue"
         />
-        <p className="text-xs text-black/50 mt-1">Up to Rs. {Number(maxPrice || 20000).toLocaleString()}</p>
+        <p className="text-xs text-white/50 mt-1">Up to Rs. {Number(maxPrice || 20000).toLocaleString()}</p>
       </div>
       <div>
         <p className="text-sm font-medium mb-3">Size</p>
@@ -46,7 +46,7 @@ export default function CategoryClient({ category, products }) {
               key={s}
               onClick={() => setSizeFilter(sizeFilter === s ? null : s)}
               className={`w-11 h-10 rounded-lg border text-sm font-medium transition-colors ${
-                sizeFilter === s ? 'border-brand bg-brand text-black' : 'border-black/15 hover:border-brand'
+                sizeFilter === s ? 'border-brand bg-brand text-white' : 'border-white/15 hover:border-brand'
               }`}
             >
               {s}
@@ -80,7 +80,7 @@ export default function CategoryClient({ category, products }) {
           </select>
           <button
             onClick={() => setFiltersOpen(true)}
-            className="md:hidden flex items-center gap-2 border border-black/15 rounded-full px-4 py-2 text-sm font-medium"
+            className="md:hidden flex items-center gap-2 border border-white/15 rounded-full px-4 py-2 text-sm font-medium"
           >
             <SlidersHorizontal size={16} /> Filters
           </button>
@@ -92,7 +92,7 @@ export default function CategoryClient({ category, products }) {
 
         <div>
           {filtered.length === 0 ? (
-            <p className="text-black/50 py-16 text-center">No products match your filters.</p>
+            <p className="text-white/50 py-16 text-center">No products match your filters.</p>
           ) : (
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {filtered.map((p) => (
@@ -106,7 +106,7 @@ export default function CategoryClient({ category, products }) {
       {filtersOpen && (
         <div className="fixed inset-0 z-50 md:hidden">
           <div className="absolute inset-0 bg-neutral-900/40" onClick={() => setFiltersOpen(false)} />
-          <div className="absolute right-0 top-0 h-full w-80 bg-white p-6 shadow-xl animate-[fadeIn_0.25s_ease-out] overflow-y-auto">
+          <div className="absolute right-0 top-0 h-full w-80 bg-neutral-950 p-6 shadow-xl animate-[fadeIn_0.25s_ease-out] overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
               <p className="font-semibold text-lg">Filters</p>
               <button onClick={() => setFiltersOpen(false)}>

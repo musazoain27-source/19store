@@ -35,7 +35,7 @@ export default async function HomePage({ searchParams }) {
           {products.length} result{products.length !== 1 ? 's' : ''} for &ldquo;{searchParams.search}&rdquo;
         </h1>
         {products.length === 0 ? (
-          <p className="text-black/50">No products matched your search. Try a different keyword.</p>
+          <p className="text-white/50">No products matched your search. Try a different keyword.</p>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {products.map((p) => (
